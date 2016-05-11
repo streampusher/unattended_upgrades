@@ -7,7 +7,7 @@
     APT::Periodic::AutocleanInterval "5";
 
     // Enable unattended upgrades
-    APT::Periodic::Unattended-Upgrade "<%= @enable_upgrades ? 1 : 0 %>";
+    APT::Periodic::Unattended-Upgrade "<%= node[:unattended_upgrades][:enable_upgrades] %>";
     APT::Periodic::RandomSleep "1800";
 ////// Suggested to put in 10periodic... //////
 
@@ -42,9 +42,9 @@ Unattended-Upgrade::Package-Blacklist {
 // If empty or unset then no email is sent, make sure that you
 // have a working mail setup on your system. The package 'mailx'
 // must be installed or anything that provides /usr/bin/mail.
-Unattended-Upgrade::Mail "<%= @upgrade_email %>";
+Unattended-Upgrade::Mail "<%= node[:unattended_upgrades][:upgrade_email] %>";
 
 
 // Automatically reboot *WITHOUT CONFIRMATION* if a
 // the file /var/run/reboot-required is found after the upgrade
-Unattended-Upgrade::Automatic-Reboot "<%= @auto_reboot ? 'true' : 'false' %>";
+Unattended-Upgrade::Automatic-Reboot "<%= node[:unattended_upgrades][:auto_reboot] %>";
